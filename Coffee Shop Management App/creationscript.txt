@@ -1,0 +1,126 @@
+-- creationscript.txt
+
+
+
+-- 1.CATEGORY
+CREATE TABLE CATEGORY 
+	(categoryid NUMBER(5,0) PRIMARY KEY, 
+	title VARCHAR(100) NOT NULL);
+	
+COMMIT;
+
+
+-- 2.PRODUCT
+CREATE TABLE PRODUCT 
+	(productid NUMBER(5,0) PRIMARY KEY, 
+	categoryid NUMBER(5,0) NOT NULL, 
+	productname VARCHAR(50) NOT NULL, 
+	unitprice DECIMAL(12,2) ,
+	available VARCHAR(50) NOT NULL,
+	CONSTRAINT categoryid_fk FOREIGN KEY (categoryid) REFERENCES category(categoryid)	
+	);
+	
+COMMIT;
+
+
+-- 3.TABLEDETAILS	
+CREATE TABLE TABLEDETAILS
+	(tableid NUMBER(5,0) PRIMARY KEY, 
+	tablenumber NUMBER(5,0) NOT NULL
+	CONSTRAINT tablenumber_chk CHECK (tablenumber BETWEEN 1 AND 999)	
+	);
+	
+COMMIT;
+
+
+-- 4.CUSTOMER	
+CREATE TABLE CUSTOMER	 
+	(customerid NUMBER(5,0) PRIMARY KEY, 
+	customername VARCHAR(50) NOT NULL,
+	phone VARCHAR(50)
+	);
+	
+COMMIT;
+
+
+-- 5.NEWORDERDETAILS
+CREATE TABLE NEWORDERDETAILS
+	(orderid NUMBER(5,0) PRIMARY KEY, 
+	customerid NUMBER(5,0), 
+	tableid NUMBER(5,0), 
+	ordernumber NUMBER(5,0) NOT NULL,
+	orderdate DATE NOT NULL,
+	outstandingamount DECIMAL(12,2) NOT NULL,
+	CONSTRAINT customerid_fk FOREIGN KEY (customerid) REFERENCES customer(customerid),
+	CONSTRAINT tableid_fk FOREIGN KEY (tableid) REFERENCES tabledetails(tableid)	
+	);
+	
+COMMIT;
+
+
+-- 6.ORDERITEM
+CREATE TABLE ORDERITEM 
+	(orderid NUMBER(5,0) NOT NULL, 
+	productid NUMBER(5,0) NOT NULL, 
+	unitprice DECIMAL(12,2), 
+	quantity NUMBER(5,0) DEFAULT 1,
+	CONSTRAINT unitprice_chk CHECK (unitprice BETWEEN 1 AND 5000) ,	
+	CONSTRAINT orderid_fk FOREIGN KEY (orderid) REFERENCES neworderdetails(orderid) ,
+	CONSTRAINT productid_fk FOREIGN KEY (productid) REFERENCES product(productid)	
+	);
+	
+COMMIT;
+
+
+-- 7.PAYMENTMETHOD		
+CREATE TABLE PAYMENTMETHOD	 
+	(paymentmethodid NUMBER(5,0) PRIMARY KEY, 
+	name VARCHAR(50) NOT NULL,
+	available VARCHAR(50) NOT NULL
+	);
+	
+COMMIT;
+
+
+-- 8.PAYMENT	
+CREATE TABLE PAYMENT 
+	(paymentid NUMBER(5,0) PRIMARY KEY, 
+	orderid NUMBER(5,0) NOT NULL, 
+	paymentmethodid NUMBER(5,0) NOT NULL, 
+	amount DECIMAL(12,2) NOT NULL,
+	paymenttime DATE NOT NULL,
+	CONSTRAINT paymentorderid_fk FOREIGN KEY (orderid) REFERENCES neworderdetails(orderid) ,
+	CONSTRAINT paymentmethodid_fk FOREIGN KEY (paymentmethodid) REFERENCES paymentmethod(paymentmethodid)	
+	);
+	
+COMMIT;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
