@@ -1,1 +1,1 @@
-# Coffee-Shop-Management-Database-Application
+# Coffee Shop Management Database Application
