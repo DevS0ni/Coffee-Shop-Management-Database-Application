@@ -54,4 +54,4 @@ The system is populated with sample data, including product categories, products
 
 ## Conclusion:
 
-The Coffee Shop Management System developed by Group 3 serves as an efficient tool for coffee shop owners and staff to manage orders, track inventory, and ensure smooth operations. It demonstrates proficiency in database management, C++ programming, and Oracle OCCI, providing a solid foundation for further enhancements and customization.
+The Coffee Shop Management System serves as an efficient tool for coffee shop owners and staff to manage orders, track inventory, and ensure smooth operations. It demonstrates proficiency in database management, C++ programming, and Oracle OCCI, providing a solid foundation for further enhancements and customization.
